@@ -31,3 +31,4 @@ spec:
       volumes:
         - name: empty-volume
           emptyDir: {}
+...

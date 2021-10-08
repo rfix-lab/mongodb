@@ -14,3 +14,4 @@ spec:
       port      : 27017 #port on load balancer
       targetPort: 27017 #port on pod
   type: LoadBalancer
+...
