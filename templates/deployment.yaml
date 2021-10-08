@@ -1,0 +1,33 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-deploy
+  labels: 
+    app: {{ .Release.Name }}-deploy
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      project: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        project: {{ .Release.Name }}  #Service willl look for those PODs Labels
+    spec:
+
+      containers:
+      - name: {{ .Release.Name }}-web
+        image: {{ .Values.container.image }}
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+          - containerPort: 27017
+        volumeMounts:
+          - name: empty-volume
+            mountPath: /empty
+      volumes:
+        - name: empty-volume
+          emptyDir: {}

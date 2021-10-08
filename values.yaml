@@ -1,0 +1,5 @@
+---
+container:
+  image: mongo:latest
+
+replicaCount: 2
